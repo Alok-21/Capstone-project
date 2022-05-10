@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-ss-configuration
+  namespace: demo
+  labels:
+    app: redis
+data:
+  redis-config: |
+    dir /var/lib/redis
+    appendonly yes
+    protected-mode no

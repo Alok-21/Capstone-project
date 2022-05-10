@@ -1,0 +1,35 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: redis-cli
+  namespace: demo
+  labels:
+    app: redis-cli
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-cli
+  template:
+    metadata:
+      name: redis-cli
+      labels:
+        app: redis-cli
+    spec:
+      containers:
+        - name: redis-cli
+          image: redis:3.2.10-alpine
+          command: ["/bin/sh","-c"]
+          args: ["sleep 100000"]
+          resources:
+            requests:
+              cpu: 800m
+              memory: 400Mi
+            limits:
+              cpu: 1000m
+              memory: 400Mi
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 10
+      dnsPolicy: ClusterFirst
+      
